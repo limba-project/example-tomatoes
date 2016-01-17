@@ -2,7 +2,6 @@
 <component>
   <id>alsa-lib</id>
   <name>ALSA Lib</name>
-  <metadata_license>MIT</metadata_license>
 
   <summary>Shared library for ALSA applications.</summary>
   <description>

@@ -1,4 +1,4 @@
-# Build script for libjpeg-turbo
+# Build script for alsa-lib
 
 before_script:
   - export CFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
@@ -10,7 +10,6 @@ before_script:
   - export LDFLAGS="-Wl,-z,relro"
   - export OBJCFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
   - export OBJCXXFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
-  #- sudo apt-get build-dep libjpeg-turbo
   - rm -rf ./lipkg/target
   - find $BUILDROOT/lipkg/ -name "*.ipk*" -exec rm {} \;
 

@@ -1,0 +1,4 @@
+Format-Version: 1.0
+
+Requires: libsdl1.2-full (>= 1.2.15)
+Build-Requires: libsdl1.2-full.sdk (>= 1.2.15)

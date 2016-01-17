@@ -1,0 +1,37 @@
+# Build script for Neverball
+
+before_script:
+  - export CFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
+  - export CPPFLAGS="-D_FORTIFY_SOURCE=2 -DNDEBUG"
+  - export CXXFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
+  - export FCFLAGS="-g -O2 -fstack-protector-strong"
+  - export FFLAGS="-g -O2 -fstack-protector-strong"
+  - export GCJFLAGS="-g -O2 -fstack-protector-strong"
+  - export LDFLAGS="-Wl,-z,relro"
+  - export OBJCFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
+  - export OBJCXXFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
+  - env | sort
+  #- sudo apt-get build-dep tomatoes
+  - find $BUILDROOT/lipkg/ -name "*.ipk" -exec rm {} \;
+
+script:
+  - export CFLAGS="$CFLAGS `sdl-config --cflags` -DVERSION=1.55"
+  - echo $CFLAGS
+  - export LDFLAGS="$LDFLAGS `sdl-config --libs` -lSDL_image -lSDL_mixer -lGL -lGLU"
+  - make
+  - install -d ./lipkg/target/bin
+  - install -d ./lipkg/target/share/pixmaps/tomatoes/
+  - install -d ./lipkg/target/etc/tomatoes/
+  - install -d ./lipkg/target/share/tomatoes/
+  - install -d ./lipkg/target/share/applications/
+  - install -d ./lipkg/target/share/icons/hicolor/64x64/apps/
+  - install tomatoes                ./lipkg/target/bin/
+  - install config.cfg              ./lipkg/target/etc/tomatoes/
+  - install icon.png                ./lipkg/target/share/icons/hicolor/64x64/apps/tomatoes.png
+  - install tomatoes.mpk            ./lipkg/target/share/tomatoes/
+  - cp -dr  music                   ./lipkg/target/share/tomatoes/
+  - install lipkg/extra/tomatoes.desktop ./lipkg/target/share/applications/
+  - lipkgen build lipkg/
+
+after_script:
+  - make clean

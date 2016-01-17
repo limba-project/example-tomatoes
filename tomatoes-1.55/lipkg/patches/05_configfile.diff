@@ -1,0 +1,18 @@
+Bug 414678 = tomatoes: Fails to load configuration file
+http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=414678
+
+reported by Enrico Tassi <gareuselesinge@debian.org>
+patch by Enrico Zini <enrico@debian.org>
+
+--- ../orig/tomatoes-1.55/src/config.cpp	2004-09-27 11:35:48.000000000 +0200
++++ ./src/config.cpp	2007-03-31 17:51:40.000000000 +0200
+@@ -79,7 +79,8 @@
+ char *get_config_location(bool write) {
+ #ifdef LINUX
+ 	// Get the path to the config file
+-	string tmp = get_tomatoes_dir() + "config.cfg";
++	static string tmp;
++	tmp = get_tomatoes_dir() + "config.cfg";
+ 
+ 	// Check if the config file exists there
+ 	if(!write) {

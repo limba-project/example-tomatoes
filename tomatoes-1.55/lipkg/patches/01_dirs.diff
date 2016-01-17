@@ -1,0 +1,24 @@
+--- ../orig/tomatoes-1.55/makefile	2004-11-20 19:50:09.000000000 +0100
++++ ./makefile	2007-01-29 13:55:29.000000000 +0100
+@@ -14,10 +14,10 @@
+ # necessary. Remember to include the trailing /
+ 
+ # MPK directory (where 'tomatoes.mpk' is), default: ./
+-MPKDIR = ./
++MPKDIR = /app/share/tomatoes/
+ 
+ # Music directory (where the music files are), default: ./music/
+-MUSICDIR = ./music/
++MUSICDIR = /app/share/tomatoes/music/
+ 
+ # Hiscore directory (where the hiscores are written to), default: ./
+ # We need read/write access!
+@@ -25,7 +25,7 @@
+ 
+ # Config directory (where the 'config.cfg' is), default: ./
+ # We need read/write access!
+-CONFIGDIR = ./
++CONFIGDIR = /app/etc/tomatoes/
+ 
+ # Override directory (unused at the moment), default: ./data/
+ OVERRIDEDIR = ./data/

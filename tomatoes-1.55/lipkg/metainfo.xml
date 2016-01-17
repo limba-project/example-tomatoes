@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component type="desktop">
+  <id>tomatoes.desktop</id>
+  <name>I Have No Tomatoes</name>
+  <metadata_license>CC0-1.0</metadata_license>
+  <summary>A tomato smashing game.</summary>
+  <description>
+    <p>
+      I Have No Tomatoes is an extreme leisure time activity idea of which culminates in the following question:
+      How many tomatoes can you smash in ten short minutes? If you have the time to spare, this game has the
+      vegetables just waiting to be eliminated!
+    </p>
+  </description>
+  <url type="homepage">http://tomatoes.sourceforge.net/</url>
+
+  <releases>
+    <release version="1.55" />
+  </releases>
+</component>

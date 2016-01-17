@@ -1,0 +1,61 @@
+Index: tomatoes-1.55/src/game.cpp
+===================================================================
+--- tomatoes-1.55.orig/src/game.cpp	2012-05-23 05:31:33.000000000 +0000
++++ tomatoes-1.55/src/game.cpp	2012-05-23 05:31:57.000000000 +0000
+@@ -403,7 +403,7 @@
+ 
+ 			// ENTER press
+ 			if(confirm_esc) {
+-				if(key[SDLK_RETURN]) {
++				if(key[SDLK_RETURN] || key[SDLK_KP_ENTER]) {
+ 					if(key_return_down == false) {
+ 						key_return_down = true;
+ 						confirm_esc = false;
+@@ -430,7 +430,7 @@
+ 
+ 				// Handle the level pause
+ 				if(level_pause == LEVEL_PAUSE_BEGIN) {
+-					if(key[SDLK_RETURN] || key[config.key_shoot[0]] || key[config.key_shoot[1]]) {
++					if(key[SDLK_RETURN] || key[SDLK_KP_ENTER] || key[config.key_shoot[0]] || key[config.key_shoot[1]]) {
+ 						if(!key_return_down) {
+ 							// Start timing the level change
+ 							start_level_timing();
+Index: tomatoes-1.55/src/hiscore.cpp
+===================================================================
+--- tomatoes-1.55.orig/src/hiscore.cpp	2012-05-23 05:31:33.000000000 +0000
++++ tomatoes-1.55/src/hiscore.cpp	2012-05-23 05:31:57.000000000 +0000
+@@ -267,7 +267,7 @@
+ 					pos = 0;
+ 				str[pos] = '\0';
+ 			}
+-			else if(key[SDLK_RETURN] && pos > 0 && str[0] != ' ') {
++			else if((key[SDLK_RETURN] || key[SDLK_KP_ENTER]) && pos > 0 && str[0] != ' ') {
+ 				fading = 2;
+ 				typed = false;
+ 			}
+Index: tomatoes-1.55/src/menu.cpp
+===================================================================
+--- tomatoes-1.55.orig/src/menu.cpp	2012-05-23 05:31:47.000000000 +0000
++++ tomatoes-1.55/src/menu.cpp	2012-05-23 05:31:57.000000000 +0000
+@@ -707,7 +707,7 @@
+ 			}
+ 
+ 			// Handle the item selection
+-			if(key[SDLK_RETURN] || key[SDLK_SPACE]) {
++			if(key[SDLK_RETURN] || key[SDLK_KP_ENTER] || key[SDLK_SPACE]) {
+ 				play_sound(SND_MENU2, false);
+ 				switch(menu_item) {
+ 					// MAIN MENU items
+Index: tomatoes-1.55/src/select_special.cpp
+===================================================================
+--- tomatoes-1.55.orig/src/select_special.cpp	2012-05-23 05:31:33.000000000 +0000
++++ tomatoes-1.55/src/select_special.cpp	2012-05-23 05:31:57.000000000 +0000
+@@ -278,7 +278,7 @@
+ 
+ 
+ 	// Invoke a special power
+-	if((key[config.key_shoot[who]] || key[SDLK_RETURN]) && icon_menu.wait == 0) {
++	if((key[config.key_shoot[who]] || key[SDLK_RETURN] || key[SDLK_KP_ENTER]) && icon_menu.wait == 0) {
+ 		int power = icon_menu.selected;
+ 
+ 		bool disabled = (icon_menu.count[power] == 0 || (icon_menu.is_on_block && (power == RED_POWER_TRAP || power == GREEN_POWER_FLOWERPOWER)));

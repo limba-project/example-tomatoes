@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Encoding=UTF-8
+Name=I Have No Tomatoes
+Name[de]=Ich Habe Keine Tomaten
+Comment=How many tomatoes can you smash in ten short minutes?
+Comment[de]=Wieviele Tomaten können Sie in zehn kurzen Minuten quetschen?
+TryExec=tomatoes
+Exec=tomatoes
+Categories=Game;ArcadeGame;
+Icon=tomatoes.png

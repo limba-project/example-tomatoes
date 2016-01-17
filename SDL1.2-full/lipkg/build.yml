@@ -1,0 +1,53 @@
+# Build script for libsdl1.2
+
+before_script:
+  - export CFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
+  - export CPPFLAGS="-D_FORTIFY_SOURCE=2"
+  - export CXXFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
+  - export FCFLAGS="-g -O2 -fstack-protector-strong"
+  - export FFLAGS="-g -O2 -fstack-protector-strong"
+  - export GCJFLAGS="-g -O2 -fstack-protector-strong"
+  - export LDFLAGS="-Wl,-z,relro"
+  - export OBJCFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
+  - export OBJCXXFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
+  - rm -rf ./lipkg/target
+  - find $BUILDROOT/lipkg/ -name "*.ipk*" -exec rm {} \;
+
+script:
+  #
+  # SDL1.2
+  #
+  - cd libsdl1.2-1.2.15 && ./configure --prefix=/app --disable-rpath --enable-sdl-dlopen --disable-loadso
+            --disable-video-ggi --disable-video-svga --disable-video-aalib
+            --disable-nas --disable-esd --disable-arts
+            --disable-alsa-shared
+            --disable-x11-shared
+            --enable-video-directfb --enable-video-caca
+  - cd libsdl1.2-1.2.15 && make -j4
+  - cd libsdl1.2-1.2.15 && make install # install globally
+  - cd libsdl1.2-1.2.15 && make install DESTDIR=$BUILDROOT/lipkg/target/
+  #
+  # SDL-Image
+  #
+  - cd sdl-image1.2-1.2.12 && ./configure --prefix=/app --disable-jpg-shared --disable-png-shared
+  - cd sdl-image1.2-1.2.12 && make -j4
+  - cd sdl-image1.2-1.2.12 && make install DESTDIR=$BUILDROOT/lipkg/target/
+  #
+  # SDL-Mixer
+  - cd sdl-mixer1.2-1.2.12 && ./configure --prefix=/app
+  - cd sdl-mixer1.2-1.2.12 && make -j4
+  - cd sdl-mixer1.2-1.2.12 && make install DESTDIR=$BUILDROOT/lipkg/target/
+  #
+  # Finalize
+  #
+  - cd $BUILDROOT
+  # remove cruft
+  - find $BUILDROOT/lipkg/target/ -name "*.la" -exec rm {} \;
+  - find $BUILDROOT/lipkg/target/ -name "*.a" -exec rm {} \;
+  # build package
+  - lipkgen build lipkg/
+
+after_script:
+  - cd libsdl1.2-1.2.15 && make clean distclean
+  - cd sdl-image1.2-1.2.12 && make clean distclean
+  - cd sdl-mixer1.2-1.2.12 && make clean distclean

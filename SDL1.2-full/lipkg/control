@@ -1,0 +1,4 @@
+Format-Version: 1.0
+
+Requires: alsa-lib (>= 1.0.29), libjpeg-turbo (>= 1.4.0)
+Build-Requires: alsa-lib.sdk (>= 1.0.29), libjpeg-turbo.sdk (>= 1.4.0)

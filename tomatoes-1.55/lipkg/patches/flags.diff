@@ -1,0 +1,14 @@
+Don't set CFLAGS and LDFLAGS in makefile.
+Use CFLAGS and LDFLAGS as set by debhelper and modified in debian/rules.
+
+--- ./makefile.orig	2012-05-23 06:20:04.000000000 +0000
++++ ./makefile	2012-05-23 06:25:42.000000000 +0000
+@@ -47,8 +47,6 @@
+ CFLAGS = -MMD -g3 -O3 -march=$(MARCH) -Wall -pg
+ LDFLAGS = `sdl-config --libs` -lSDL_image -lSDL_mixer -lGL -lGLU -pg
+ else
+-CFLAGS = -MMD -O3 -march=$(MARCH) -Wall $(SDL_FLAGS)
+-LDFLAGS = `sdl-config --libs` -lSDL_image -lSDL_mixer -lGL -lGLU -s
+ endif
+ endif
+ 

@@ -1,0 +1,28 @@
+# Build script for libjpeg-turbo
+
+before_script:
+  - export CFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
+  - export CPPFLAGS="-D_FORTIFY_SOURCE=2"
+  - export CXXFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
+  - export FCFLAGS="-g -O2 -fstack-protector-strong"
+  - export FFLAGS="-g -O2 -fstack-protector-strong"
+  - export GCJFLAGS="-g -O2 -fstack-protector-strong"
+  - export LDFLAGS="-Wl,-z,relro"
+  - export OBJCFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
+  - export OBJCXXFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security"
+  #- sudo apt-get build-dep libjpeg-turbo
+  - rm -rf ./lipkg/target
+  - find $BUILDROOT/lipkg/ -name "*.ipk*" -exec rm {} \;
+
+script:
+  - ./configure --prefix=/app --disable-silent-rules --disable-static --disable-python
+  - make -j4
+  - make install DESTDIR=$BUILDROOT/lipkg/target/
+  # remove cruft
+  - find $BUILDROOT/lipkg/target/ -name "*.la" -exec rm {} \;
+  - find $BUILDROOT/lipkg/target/ -name "*.a" -exec rm {} \;
+  # build package
+  - lipkgen build lipkg/
+
+after_script:
+  - make clean distclean

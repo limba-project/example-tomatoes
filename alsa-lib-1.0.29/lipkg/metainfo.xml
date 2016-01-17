@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <id>alsa-lib</id>
+  <name>ALSA Lib</name>
+  <metadata_license>MIT</metadata_license>
+
+  <summary>Shared library for ALSA applications.</summary>
+  <description>
+    <p>
+      This package contains the ALSA library and its standard plugins, as well as the required configuration files.
+    </p>
+    <p>
+      ALSA is the Advanced Linux Sound Architecture.
+    </p>
+  </description>
+
+  <url type="homepage">http://www.alsa-project.org/</url>
+
+  <releases>
+    <release version="1.0.29" />
+  </releases>
+</component>

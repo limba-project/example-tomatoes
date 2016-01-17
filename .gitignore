@@ -1,6 +1,7 @@
+chroot/
+.pc/
 *.o
 *.so
 *.la
 *.ipk
 *.ipk.dsc
-.pc/

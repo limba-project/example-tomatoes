@@ -25,7 +25,7 @@ script:
             --disable-x11-shared
             --enable-video-directfb --enable-video-caca
   - make -j4
-  - make install # install globally
+  - sudo make install # install globally
   - make install DESTDIR=$BUILDROOT/lipkg/target/ # install to IPK bundle
   #
   # SDL-Image

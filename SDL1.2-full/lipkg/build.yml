@@ -17,26 +17,29 @@ script:
   #
   # SDL1.2
   #
-  - cd libsdl1.2-1.2.15 && ./configure --prefix=/app --disable-rpath --enable-sdl-dlopen --disable-loadso
+  - cd libsdl1.2-1.2.15
+  - ./configure --prefix=/app --disable-rpath --enable-sdl-dlopen --disable-loadso
             --disable-video-ggi --disable-video-svga --disable-video-aalib
             --disable-nas --disable-esd --disable-arts
             --disable-alsa-shared
             --disable-x11-shared
             --enable-video-directfb --enable-video-caca
-  - cd libsdl1.2-1.2.15 && make -j4
-  - cd libsdl1.2-1.2.15 && make install # install globally
-  - cd libsdl1.2-1.2.15 && make install DESTDIR=$BUILDROOT/lipkg/target/
+  - make -j4
+  - make install # install globally
+  - make install DESTDIR=$BUILDROOT/lipkg/target/ # install to IPK bundle
   #
   # SDL-Image
   #
-  - cd sdl-image1.2-1.2.12 && ./configure --prefix=/app --disable-jpg-shared --disable-png-shared
-  - cd sdl-image1.2-1.2.12 && make -j4
-  - cd sdl-image1.2-1.2.12 && make install DESTDIR=$BUILDROOT/lipkg/target/
+  - cd ../sdl-image1.2-1.2.12
+  - ./configure --prefix=/app --disable-jpg-shared --disable-png-shared
+  - make -j4
+  - make install DESTDIR=$BUILDROOT/lipkg/target/
   #
   # SDL-Mixer
-  - cd sdl-mixer1.2-1.2.12 && ./configure --prefix=/app
-  - cd sdl-mixer1.2-1.2.12 && make -j4
-  - cd sdl-mixer1.2-1.2.12 && make install DESTDIR=$BUILDROOT/lipkg/target/
+  - cd ../sdl-mixer1.2-1.2.12
+  - ./configure --prefix=/app
+  - make -j4
+  - make install DESTDIR=$BUILDROOT/lipkg/target/
   #
   # Finalize
   #
@@ -49,5 +52,6 @@ script:
 
 after_script:
   - cd libsdl1.2-1.2.15 && make clean distclean
-  - cd sdl-image1.2-1.2.12 && make clean distclean
-  - cd sdl-mixer1.2-1.2.12 && make clean distclean
+  - cd ../sdl-image1.2-1.2.12 && make clean distclean
+  - cd ../sdl-mixer1.2-1.2.12 && make clean distclean
+  - cd $BUILDROOT
